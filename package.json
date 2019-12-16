@@ -1,0 +1,83 @@
+{
+    "name": "@proximus/graphql-gateway",
+    "version": "1.0.0",
+    "description": "GraphQl gateway",
+    "main": "main.js",
+    "scripts": {
+        "compile": "rimraf dist && tsc -p .",
+        "start": "node ./dist/main.js",
+        "tslint": "tslint --project tslint.json --fix",
+        "tslint:nofix": "tslint --project tslint.json",
+        "test": "jest  --forceExit  --detectOpenHandles",
+        "test:badges": "jest-coverage-badges output ./badges",
+        "test:coverage": "jest --coverage --forceExit --detectOpenHandles && npm run test:badges",
+        "build": "npm run compile && npm run tslint && npm run test:coverage",
+        "build:start": "npm run build && npm run start",
+        "bump-major-version": "npm version major --force -m \"Upgrade to %s (major changes)\" && git push --follow-tags",
+        "bump-minor-version": "npm version minor --force -m \"Upgrade to %s (minor changes)\" && git push --follow-tags",
+        "bump-patch-version": "npm version patch --force -m \"Upgrade to %s (patch)\" && git push --follow-tags",
+        "tsc": "tsc"
+    },
+    "author": "Proximus",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bc-training/graphql-gateway.git"
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "@types/jest": "24.0.23",
+        "@types/node": "12.12.14",
+        "jest": "24.9.0",
+        "jest-cli": "24.9.0",
+        "jest-coverage-badges": "1.1.2",
+        "jest-create-mock-instance": "1.1.0",
+        "reflect-metadata": "0.1.13",
+        "rimraf": "3.0.0",
+        "ts-jest": "24.2.0",
+        "ts-node-dev": "1.0.0-pre.44",
+        "tslint": "5.20.1",
+        "tslint-loader": "3.5.4",
+        "typedi": "0.8.0",
+        "typescript": "3.7.3"
+    },
+    "jest": {
+        "transform": {
+            "^.+\\.tsx?$": "ts-jest"
+        },
+        "testEnvironment": "node",
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))(\\.it)?\\.(jsx?|tsx?)$",
+        "testPathIgnorePatterns": [
+            "/coverage",
+            "/dist"
+        ],
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js",
+            "jsx",
+            "json",
+            "node"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 80,
+                "functions": 80,
+                "lines": 80,
+                "statements": -20
+            }
+        },
+        "collectCoverageFrom": [
+            "src/**/*.ts"
+        ],
+        "coverageReporters": [
+            "json-summary",
+            "text",
+            "lcov"
+        ]
+    },
+    "dependencies": {
+        "@apollo/gateway": "0.11.4",
+        "apollo-server": "2.9.13",
+        "graphql": "14.5.8"
+    }
+}
